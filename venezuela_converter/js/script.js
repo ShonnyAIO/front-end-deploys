@@ -65,8 +65,17 @@ function getExchangeRate() {
         } else {
             totalExchangeRate = (amountVal * exchangeRate).toFixed(2);
         }
-        exchangeRateTxt.innerHTML = `Cambio total: <br/> ${amountVal} ${fromCurrency.value} = ${totalExchangeRate} ${toCurrency.value}`;
+        exchangeRateTxt.innerHTML = `Cambio total: <br/> ${amountVal} ${fromCurrency.value} = <input id='data' type='text' class='results' value='${totalExchangeRate}'> ${toCurrency.value} <button id='copy' class='copy-results'> Copiar resultado</button>`;
+        document.querySelector("#copy").addEventListener("click", copy);
     }).catch(() => {
         exchangeRateTxt.innerText = "Algo no esta funcionando";
     });
+}
+
+function copy() {
+    var copyText = document.querySelector("#data");
+    copyText.select();
+    document.execCommand("copy");
+    let advise = document.querySelector('.copy-results');
+    advise.innerHTML = 'Monto copiado exitosamente';
 }

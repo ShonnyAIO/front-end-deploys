@@ -60,6 +60,15 @@ form input:focus{
     border: 2px solid var(--color-default);
 }
 
+.results{
+    width: 120px;
+    
+}
+
+.copy-results{
+    margin-top: 20px;
+}
+
 form .drop-list{
     display: flex;
     align-items: center;
