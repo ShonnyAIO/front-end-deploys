@@ -3,7 +3,6 @@ const dropList = document.querySelectorAll('.drop-list select'),
     toCurrency = document.querySelector('.to select'),
     getButton = document.querySelector('form button');
 
-
 for (let i = 0; i < dropList.length; i++) {
     dropList[i].addEventListener("change", e => {
         loadFlag(e.target);
@@ -40,6 +39,19 @@ function loadFlag(element) {
     }
 }
 
+var price_dollar = '';
+function getDollar() {
+    let url = `https://dollar-bcv-query.herokuapp.com/dollar-bcv/`;
+    fetch(url).then(response => response.json()).then(result => {
+        let fecha = new Date().toLocaleDateString();
+        let precio = Number(result.precio);
+        const dollar_html = document.querySelector('.precio-bcv');
+        price_dollar = precio;
+        dollar_html.innerHTML = `Tasa del dia: ${precio.toFixed(4)} BS.D <br/> <span> Fecha: ${fecha} </span>`;
+    }).catch(() => {
+        dollar_html.innerHTML = "Algo no esta funcionando";
+    });
+}
 
 function getExchangeRate() {
     const amount = document.querySelector(".amount input"),
@@ -50,26 +62,21 @@ function getExchangeRate() {
         amountVal = 1;
     }
 
-
     if (fromCurrency.value === toCurrency.value) {
         return exchangeRateTxt.innerText = "No se puede cambiar la misma moneda";
     }
 
     exchangeRateTxt.innerText = "Calculando el cambio ...";
-    let url = `https://dollar-bcv-query.herokuapp.com/dollar-bcv/`;
-    fetch(url).then(response => response.json()).then(result => {
-        let exchangeRate = 1 / result.precio;
-        let totalExchangeRate;
-        if (fromCurrency.value == 'USD') {
-            totalExchangeRate = (amountVal / exchangeRate).toFixed(2);
-        } else {
-            totalExchangeRate = (amountVal * exchangeRate).toFixed(2);
-        }
-        exchangeRateTxt.innerHTML = `Cambio total: <br/> ${amountVal} ${fromCurrency.value} = <input id='data' type='text' class='results' value='${totalExchangeRate}'> ${toCurrency.value} <button id='copy' class='copy-results'> Copiar resultado</button>`;
-        document.querySelector("#copy").addEventListener("click", copy);
-    }).catch(() => {
-        exchangeRateTxt.innerText = "Algo no esta funcionando";
-    });
+    let exchangeRate = 1 / price_dollar;
+    let totalExchangeRate;
+    if (fromCurrency.value == 'USD') {
+        totalExchangeRate = (amountVal / exchangeRate).toFixed(2);
+    } else {
+        totalExchangeRate = (amountVal * exchangeRate).toFixed(2);
+    }
+    exchangeRateTxt.innerHTML = `Cambio total: <br/> ${amountVal} ${fromCurrency.value} = <input id='data' type='text' class='results' value='${totalExchangeRate}'> ${toCurrency.value} <button id='copy' class='copy-results'> Copiar resultado</button>`;
+    document.querySelector("#copy").addEventListener("click", copy);
+
 }
 
 function copy() {
@@ -79,3 +86,6 @@ function copy() {
     let advise = document.querySelector('.copy-results');
     advise.innerHTML = 'Monto copiado exitosamente';
 }
+
+
+getDollar();
