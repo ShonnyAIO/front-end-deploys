@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <title>Starbucks Website Landing Page</title>
+</head>
+
+<body>
+    <section>
+        <div class="circle">
+        </div>
+        <header>
+            <a href="#" class="logo"><img src="images/logo.png" alt="starbucks"></a>
+            <div class="toggle" onclick="toggleMenu();"></div>
+            <ul class="navigation">
+                <li> <a href="#">Home</a></li>
+                <li> <a href="#">Menu</a></li>
+                <li> <a href="#">Que hay de nuevo? </a> </li>
+                <li> <a href="#">Contact </a> </li>
+            </ul>
+        </header>
+        <div class="content">
+            <div class="textBox">
+                <h2>Is is not just coffee. It is <span>Startbucks</span></h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, ad sit? Nobis eum magni
+                    eligendi iste quasi accusamus delectus maxime libero cumque recusandae, deserunt doloribus corrupti
+                    laboriosam inventore rerum natus.</p>
+                <button><a href="#">Learn More</a></button>
+            </div>
+            <div class="imgBox">
+                <img src="images/img1.png" class="startbucks" />
+            </div>
+        </div>
+        <ul class="thumb">
+            <li> <img src="images/img1.png" alt="Image #1"
+                    onclick="imgSlider('images/img1.png'); changeCircleColor('#017143')" /> </li>
+            <li> <img src="images/img2.png" alt="Image #2"
+                    onclick="imgSlider('images/img2.png'); changeCircleColor('#eb7495')" /> </li>
+            <li> <img src="images/img3.png" alt="Image #3"
+                    onclick="imgSlider('images/img3.png'); changeCircleColor('#d752b1')" /> </li>
+        </ul>
+        <ul class="sci">
+            <li><a href="#"><i class="uil uil-instagram"></i></a></li>
+            <li><a href="#"><i class="uil uil-whatsapp"></i></a></li>
+        </ul>
+    </section>
+    <script type="text/javascript" src="scripts.js"> </script>
+</body>
+
+</html>
